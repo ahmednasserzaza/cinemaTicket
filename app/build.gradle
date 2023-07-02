@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -63,4 +65,20 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    // hilt
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // coil
+    implementation("io.coil-kt:coil-compose:2.0.0")
+
+    // constraint layout
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+    // navigation
+    implementation("androidx.navigation:navigation-common:2.6.0")
+
+
 }
