@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Cinema Ticket</string>
     <string name="actor_description">About 7,000 openings for actors are projected each year, on average, over the decade. Many of those openings are expected to result from the need to replace workers who transfer to different occupations or exit the labor force, such as to retire.</string>
+    <string name="booking">Booking</string>
+    <string name="filter_one">Fantasy</string>
+    <string name="filter_two">Adventure</string>
+    <string name="movie_large_name">Fantastic Beats , The Secret of Dumbledore</string>
 </resources>
