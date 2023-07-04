@@ -13,12 +13,12 @@ import com.fighter.cinematicket.ui.theme.LightWhite
 import com.fighter.cinematicket.ui.theme.TransGray
 
 @Composable
-fun ExitPainter(primaryPainter: Painter) {
+fun ExitPainter(primaryPainter: Painter, modifier: Modifier = Modifier) {
     Icon(
         painter = primaryPainter,
         contentDescription = null,
         tint = LightWhite,
-        modifier = Modifier
+        modifier = modifier
             .clip(shape = CircleShape)
             .background(TransGray)
             .padding(4.dp)

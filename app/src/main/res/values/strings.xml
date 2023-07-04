@@ -5,4 +5,8 @@
     <string name="filter_one">Fantasy</string>
     <string name="filter_two">Adventure</string>
     <string name="movie_large_name">Fantastic Beats , The Secret of Dumbledore</string>
+    <string name="available">Available</string>
+    <string name="taken">Taken</string>
+    <string name="selected">Selected</string>
+    <string name="buy_tickets">Buy Tickets</string>
 </resources>

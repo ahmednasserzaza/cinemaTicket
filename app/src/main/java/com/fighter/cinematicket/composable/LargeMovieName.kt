@@ -10,13 +10,13 @@ import androidx.compose.ui.unit.sp
 import com.fighter.cinematicket.ui.theme.OpenSans
 
 @Composable
-fun LargeMovieName(text: String) {
+fun LargeMovieName(text: String , modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontFamily = OpenSans,
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         textAlign = TextAlign.Center
     )
 }
