@@ -36,12 +36,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
-    HomeContent(state , viewModel::updateCurrentImage)
+    HomeContent(state, viewModel::updateCurrentImage)
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun HomeContent(state: HomeUiState , updateCurrentImage: (String) -> Unit ) {
+fun HomeContent(state: HomeUiState, onUpdateMovieImage: (String) -> Unit) {
     Column(
         Modifier
             .fillMaxSize()
@@ -49,8 +49,7 @@ fun HomeContent(state: HomeUiState , updateCurrentImage: (String) -> Unit ) {
     ) {
         Box(Modifier.fillMaxHeight(0.65f)) {
             Image(
-//                rememberAsyncImagePainter(model = state.currentImage)
-                painter = painterResource(id = R.drawable.poster_image),
+                painter = rememberAsyncImagePainter(model = state.currentImage),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -70,16 +69,16 @@ fun HomeContent(state: HomeUiState , updateCurrentImage: (String) -> Unit ) {
                     OutLinedChip(text = stringResource(R.string.coming_soon))
                 }
 
-                AutoSliding(state.images){ currentImage ->
-                    updateCurrentImage(currentImage)
-                }
+                AutoSliding(state.images, onUpdateMovieImage)
             }
 
         }
 
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .weight(1f)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+        ) {
             Row(
                 Modifier
                     .fillMaxWidth()
@@ -105,7 +104,6 @@ fun HomeContent(state: HomeUiState , updateCurrentImage: (String) -> Unit ) {
                 BookingFilter(text = stringResource(R.string.filter_two))
             }
         }
-
     }
 }
 

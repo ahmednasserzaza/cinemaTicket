@@ -17,9 +17,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         getMovies()
     }
 
-    fun updateCurrentImage(currentImage: String) {
-       _state.update {
-            it.copy(currentImage = currentImage)
+    fun updateCurrentImage(currentImageUrl: String) {
+        _state.update {
+            it.copy(currentImage = currentImageUrl)
         }
     }
 
@@ -42,5 +42,6 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             )
         }
     }
-
 }
+
+

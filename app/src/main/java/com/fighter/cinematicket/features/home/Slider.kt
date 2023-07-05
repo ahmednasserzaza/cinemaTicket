@@ -1,44 +1,30 @@
 package com.fighter.cinematicket.features.home
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
-import kotlinx.coroutines.delay
-import java.lang.Thread.yield
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import kotlin.math.absoluteValue
 
-@OptIn(ExperimentalFoundationApi::class)
 @ExperimentalPagerApi
 @Composable
-fun AutoSliding(moviesImages: List<String>, updateCurrentImage: (String) -> Unit) {
+fun AutoSliding(moviesImages: List<String>, onUpdateMovieImage: (String) -> Unit) {
     val pagerState = rememberPagerState(initialPage = 1)
-
-    LaunchedEffect(Unit) {
-        while (true) {
-            yield()
-            delay(2000)
-            pagerState.animateScrollToPage(
-                page = (pagerState.currentPage + 1) % (moviesImages.size),
-                animationSpec = tween(800)
-            )
-        }
-    }
 
     Column(
         Modifier
@@ -46,18 +32,22 @@ fun AutoSliding(moviesImages: List<String>, updateCurrentImage: (String) -> Unit
             .padding(vertical = 16.dp)
     ) {
         HorizontalPager(
-            pageCount = moviesImages.size,
+            modifier = Modifier.fillMaxSize(),
+            count = moviesImages.size,
             state = pagerState,
-            contentPadding = PaddingValues(horizontal = 48.dp),
+            contentPadding = PaddingValues(horizontal = 40.dp),
         ) { page ->
 
             val currentImageUrl = moviesImages[page]
-            updateCurrentImage(currentImageUrl)
-
             val pageOffset = (pagerState.currentPage - page).absoluteValue
-
-            val scale = 0.85f + 0.15f * (1f - pageOffset.coerceIn(0, 1))
-            val alpha = 0.8f + 0.8f * (1f - pageOffset.coerceIn(0, 1))
+            val scale by animateFloatAsState(
+                targetValue = 0.85f + 0.15f * (1f - pageOffset.coerceIn(0, 1)),
+                animationSpec = tween(durationMillis = 500)
+            )
+            val alpha by animateFloatAsState(
+                targetValue = 0.8f + 0.8f * (1f - pageOffset.coerceIn(0, 1)),
+                animationSpec = tween(durationMillis = 500)
+            )
 
             Card(
                 modifier = Modifier
@@ -75,7 +65,7 @@ fun AutoSliding(moviesImages: List<String>, updateCurrentImage: (String) -> Unit
                     modifier = Modifier.fillMaxSize(),
                 )
             }
+            onUpdateMovieImage(moviesImages[pagerState.currentPage])
         }
     }
-
 }
