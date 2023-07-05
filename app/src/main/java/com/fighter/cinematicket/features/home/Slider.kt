@@ -27,7 +27,7 @@ import kotlin.math.absoluteValue
 @ExperimentalPagerApi
 @Composable
 fun AutoSliding(moviesImages: List<String>, updateCurrentImage: (String) -> Unit) {
-    val pagerState = rememberPagerState(initialPage = moviesImages.size / 2)
+    val pagerState = rememberPagerState(initialPage = 1)
 
     LaunchedEffect(Unit) {
         while (true) {

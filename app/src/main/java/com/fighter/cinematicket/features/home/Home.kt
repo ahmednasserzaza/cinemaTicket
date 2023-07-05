@@ -47,9 +47,10 @@ fun HomeContent(state: HomeUiState , updateCurrentImage: (String) -> Unit ) {
             .fillMaxSize()
             .background(White)
     ) {
-        Box(Modifier.fillMaxHeight(0.6f)) {
+        Box(Modifier.fillMaxHeight(0.65f)) {
             Image(
-                painter = rememberAsyncImagePainter(model = state.currentImage),
+//                rememberAsyncImagePainter(model = state.currentImage)
+                painter = painterResource(id = R.drawable.poster_image),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
