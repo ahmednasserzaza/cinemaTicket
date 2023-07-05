@@ -81,9 +81,7 @@ dependencies {
     implementation("androidx.navigation:navigation-common:2.6.0")
 
     // Paging library
-    implementation "com.google.accompanist:accompanist-pager:0.13.0"
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.13.0"
-
+    implementation "com.google.accompanist:accompanist-pager:0.20.0"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
 

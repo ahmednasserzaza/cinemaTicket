@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
 import com.fighter.cinematicket.R
 import com.fighter.cinematicket.composable.BookingFilter
 import com.fighter.cinematicket.composable.FilledChip
@@ -35,12 +36,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
-    HomeContent(state)
+    HomeContent(state , viewModel::updateCurrentImage)
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun HomeContent(state: HomeUiState) {
+fun HomeContent(state: HomeUiState , updateCurrentImage: (String) -> Unit ) {
     Column(
         Modifier
             .fillMaxSize()
@@ -48,7 +49,7 @@ fun HomeContent(state: HomeUiState) {
     ) {
         Box(Modifier.fillMaxHeight(0.6f)) {
             Image(
-                painter = painterResource(id = R.drawable.poster_image),
+                painter = rememberAsyncImagePainter(model = state.currentImage),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -68,7 +69,9 @@ fun HomeContent(state: HomeUiState) {
                     OutLinedChip(text = stringResource(R.string.coming_soon))
                 }
 
-                AutoSliding(state.images)
+                AutoSliding(state.images){ currentImage ->
+                    updateCurrentImage(currentImage)
+                }
             }
 
         }
@@ -101,7 +104,6 @@ fun HomeContent(state: HomeUiState) {
                 BookingFilter(text = stringResource(R.string.filter_two))
             }
         }
-
 
     }
 }
