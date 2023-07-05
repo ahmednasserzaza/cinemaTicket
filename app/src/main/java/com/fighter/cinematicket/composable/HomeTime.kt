@@ -1,6 +1,5 @@
 package com.fighter.cinematicket.composable
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -16,30 +15,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fighter.cinematicket.ui.theme.LightWhite
-import com.fighter.cinematicket.ui.theme.TransGray
+import com.fighter.cinematicket.ui.theme.Black
+import com.fighter.cinematicket.ui.theme.LightBlack
 
 @Composable
-fun TimePainterWithText(
-    secondaryPainter: Painter,
-    secondaryPainterText: String,
-    modifier: Modifier = Modifier
-) {
+fun HomeTime(time:String , painter: Painter) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .width(80.dp)
             .clip(shape = RoundedCornerShape(16.dp))
-            .background(TransGray)
             .padding(4.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Icon(
-            painter = secondaryPainter,
+            painter = painter,
             contentDescription = null,
-            tint = LightWhite,
+            tint = LightBlack,
             modifier = Modifier.size(18.dp)
         )
-        Text(text = secondaryPainterText, fontSize = 12.sp, color = LightWhite)
+        Text(text = time, fontSize = 12.sp, color = Black)
     }
 }
