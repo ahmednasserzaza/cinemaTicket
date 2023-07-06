@@ -1,4 +1,4 @@
-package com.fighter.cinematicket.features.tickets
+package com.fighter.cinematicket.screens.tickets
 
 data class TicketUiState(
     val dates: List<DateUiSate> = emptyList(),

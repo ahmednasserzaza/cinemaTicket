@@ -1,4 +1,4 @@
-package com.fighter.cinematicket.features.tickets
+package com.fighter.cinematicket.screens.tickets
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

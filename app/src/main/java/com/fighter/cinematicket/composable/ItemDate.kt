@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -17,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fighter.cinematicket.features.tickets.DateUiSate
+import com.fighter.cinematicket.screens.tickets.DateUiSate
 import com.fighter.cinematicket.ui.theme.Black
 import com.fighter.cinematicket.ui.theme.Gray
 import com.fighter.cinematicket.ui.theme.LightBlack

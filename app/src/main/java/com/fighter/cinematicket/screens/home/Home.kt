@@ -1,6 +1,5 @@
-package com.fighter.cinematicket.features.home
+package com.fighter.cinematicket.screens.home
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,11 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
-import com.fighter.cinematicket.MainActivity
 import com.fighter.cinematicket.R
 import com.fighter.cinematicket.composable.BookingFilter
 import com.fighter.cinematicket.composable.FilledChip
@@ -38,14 +34,11 @@ import com.fighter.cinematicket.composable.HomeTime
 import com.fighter.cinematicket.composable.IconWithBadge
 import com.fighter.cinematicket.composable.LargeMovieName
 import com.fighter.cinematicket.composable.OutLinedChip
-import com.fighter.cinematicket.composable.SelectedIcon
+import com.fighter.cinematicket.composable.RoundedButton
 import com.fighter.cinematicket.composable.UnSelectedIcon
 import com.fighter.cinematicket.composable.navigateToBookingScreen
-import com.fighter.cinematicket.composable.navigateToHomeScreen
-import com.fighter.cinematicket.composable.navigateToTicketScreen
 import com.fighter.cinematicket.ui.theme.White
 import com.google.accompanist.pager.ExperimentalPagerApi
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Composable
 fun HomeScreen(
@@ -134,7 +127,7 @@ fun HomeContent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            SelectedIcon(painter = painterResource(id = R.drawable.icon_movie), onClickHomeIcon)
+            RoundedButton(painter = painterResource(id = R.drawable.icon_movie), onClickHomeIcon)
             UnSelectedIcon(painter = painterResource(id = R.drawable.icon_search))
             IconWithBadge(counter = 5, painter = painterResource(id = R.drawable.icon_ticket))
             UnSelectedIcon(painter = painterResource(id = R.drawable.icon_user))

@@ -1,4 +1,4 @@
-package com.fighter.cinematicket.features.booking
+package com.fighter.cinematicket.screens.booking
 
 data class BookingUiState(
     val posterImage: String = "",

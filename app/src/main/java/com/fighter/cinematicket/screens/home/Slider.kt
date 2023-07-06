@@ -1,4 +1,4 @@
-package com.fighter.cinematicket.features.home
+package com.fighter.cinematicket.screens.home
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween

@@ -14,12 +14,12 @@ import com.fighter.cinematicket.ui.theme.Orange
 import com.fighter.cinematicket.ui.theme.White
 
 @Composable
-fun SelectedIcon(painter: Painter, onClick: () -> Unit) {
+fun RoundedButton(painter: Painter, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Icon(
         painter = painter,
         contentDescription = null,
         tint = White,
-        modifier = Modifier
+        modifier = modifier
             .clip(shape = CircleShape)
             .clickable { onClick() }
             .background(Orange)

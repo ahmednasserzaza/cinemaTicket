@@ -1,4 +1,4 @@
-package com.fighter.cinematicket.features.tickets
+package com.fighter.cinematicket.screens.tickets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
