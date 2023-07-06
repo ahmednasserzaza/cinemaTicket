@@ -35,7 +35,7 @@ fun AutoSliding(moviesImages: List<String>, onUpdateMovieImage: (String) -> Unit
             modifier = Modifier.fillMaxSize(),
             count = moviesImages.size,
             state = pagerState,
-            contentPadding = PaddingValues(horizontal = 40.dp),
+            contentPadding = PaddingValues(horizontal = 48.dp),
         ) { page ->
 
             val currentImageUrl = moviesImages[page]
