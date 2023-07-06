@@ -1,5 +1,6 @@
 package com.fighter.cinematicket.features.home
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,30 +20,50 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHost
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+import com.fighter.cinematicket.MainActivity
 import com.fighter.cinematicket.R
 import com.fighter.cinematicket.composable.BookingFilter
 import com.fighter.cinematicket.composable.FilledChip
 import com.fighter.cinematicket.composable.HomeTime
+import com.fighter.cinematicket.composable.IconWithBadge
 import com.fighter.cinematicket.composable.LargeMovieName
 import com.fighter.cinematicket.composable.OutLinedChip
+import com.fighter.cinematicket.composable.SelectedIcon
+import com.fighter.cinematicket.composable.UnSelectedIcon
+import com.fighter.cinematicket.composable.navigateToBookingScreen
+import com.fighter.cinematicket.composable.navigateToHomeScreen
+import com.fighter.cinematicket.composable.navigateToTicketScreen
 import com.fighter.cinematicket.ui.theme.White
 import com.google.accompanist.pager.ExperimentalPagerApi
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(
+    navController: NavHostController,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     val state by viewModel.state.collectAsState()
-    HomeContent(state, viewModel::updateCurrentImage)
+
+    HomeContent(state, viewModel::updateCurrentImage) { navigateToBookingScreen(navController) }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun HomeContent(state: HomeUiState, onUpdateMovieImage: (String) -> Unit) {
+fun HomeContent(
+    state: HomeUiState,
+    onUpdateMovieImage: (String) -> Unit,
+    onClickHomeIcon: () -> Unit
+) {
     Column(
         Modifier
             .fillMaxSize()
@@ -104,11 +126,24 @@ fun HomeContent(state: HomeUiState, onUpdateMovieImage: (String) -> Unit) {
                 BookingFilter(text = stringResource(R.string.filter_two))
             }
         }
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            SelectedIcon(painter = painterResource(id = R.drawable.icon_movie), onClickHomeIcon)
+            UnSelectedIcon(painter = painterResource(id = R.drawable.icon_search))
+            IconWithBadge(counter = 5, painter = painterResource(id = R.drawable.icon_ticket))
+            UnSelectedIcon(painter = painterResource(id = R.drawable.icon_user))
+        }
     }
 }
 
 @Preview
 @Composable
 fun PreviewHomeScreen() {
-    HomeScreen()
+    HomeScreen(NavHostController(LocalContext.current))
 }

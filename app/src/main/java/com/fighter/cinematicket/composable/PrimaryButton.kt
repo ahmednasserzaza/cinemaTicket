@@ -14,9 +14,9 @@ import com.fighter.cinematicket.ui.theme.OpenSans
 import com.fighter.cinematicket.ui.theme.Orange
 
 @Composable
-fun PrimaryButton(painter: Painter, text: String) {
+fun PrimaryButton(painter: Painter, text: String, onClick: () -> Unit) {
     Button(
-        onClick = {},
+        onClick = {onClick()},
         colors = ButtonDefaults.buttonColors(containerColor = Orange),
     ) {
         Icon(

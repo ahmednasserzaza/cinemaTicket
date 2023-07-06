@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.fighter.cinematicket.R
 import com.fighter.cinematicket.composable.CinemaScreen
 import com.fighter.cinematicket.composable.CinemaSeats
@@ -35,6 +36,7 @@ import com.fighter.cinematicket.composable.ItemDate
 import com.fighter.cinematicket.composable.ItemTime
 import com.fighter.cinematicket.composable.PrimaryButton
 import com.fighter.cinematicket.composable.SeatsGraphItem
+import com.fighter.cinematicket.composable.navigateToHomeScreen
 import com.fighter.cinematicket.ui.theme.Black
 import com.fighter.cinematicket.ui.theme.Gray
 import com.fighter.cinematicket.ui.theme.OpenSans
@@ -42,15 +44,18 @@ import com.fighter.cinematicket.ui.theme.Orange
 import com.fighter.cinematicket.ui.theme.White
 
 @Composable
-fun TicketScreen(viewModel: TicketViewModel = hiltViewModel()) {
+fun TicketScreen(
+    navController: NavHostController,
+    viewModel: TicketViewModel = hiltViewModel()
+) {
     val state by viewModel.state.collectAsState()
     TicketContent(
-        state = state,
-    )
+        state = state
+    ) { navigateToHomeScreen(navController) }
 }
 
 @Composable
-fun TicketContent(state: TicketUiState) {
+fun TicketContent(state: TicketUiState, onClickByTicketButton: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,7 +132,8 @@ fun TicketContent(state: TicketUiState) {
                 }
                 PrimaryButton(
                     painter = painterResource(id = R.drawable.icon_bocking),
-                    text = stringResource(R.string.buy_tickets)
+                    text = stringResource(R.string.buy_tickets),
+                    onClick = onClickByTicketButton
                 )
             }
         }
@@ -138,5 +144,4 @@ fun TicketContent(state: TicketUiState) {
 @Preview
 @Composable
 fun PreviewTicket() {
-    TicketScreen()
 }

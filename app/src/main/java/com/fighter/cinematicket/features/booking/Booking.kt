@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,36 +23,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.fighter.cinematicket.R
 import com.fighter.cinematicket.composable.ActorItem
 import com.fighter.cinematicket.composable.BookingFilter
 import com.fighter.cinematicket.composable.LargeMovieName
 import com.fighter.cinematicket.composable.LongText
-import com.fighter.cinematicket.composable.PlayPainter
 import com.fighter.cinematicket.composable.PosterImage
 import com.fighter.cinematicket.composable.PrimaryButton
+import com.fighter.cinematicket.composable.SelectedIcon
 import com.fighter.cinematicket.composable.TextBookingHeader
 import com.fighter.cinematicket.composable.TopAppBar
-import com.fighter.cinematicket.ui.theme.Black
-import com.fighter.cinematicket.ui.theme.OpenSans
+import com.fighter.cinematicket.composable.navigateToTicketScreen
 import com.fighter.cinematicket.ui.theme.White
 
 @Composable
 fun BookingScreen(
+    navHostController: NavHostController,
     viewModel: BookingViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    BookingContent(state)
+    BookingContent(state) { navigateToTicketScreen(navHostController) }
 }
 
 @Composable
-fun BookingContent(state: BookingUiState) {
+fun BookingContent(state: BookingUiState, onClickBookingButton: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -70,7 +68,10 @@ fun BookingContent(state: BookingUiState) {
                 contentAlignment = Alignment.Center
             ) {
                 PosterImage(painter = painterResource(id = R.drawable.poster_image))
-                PlayPainter(painter = painterResource(id = R.drawable.icon_play))
+                SelectedIcon(
+                    painter = painterResource(id = R.drawable.icon_play),
+                    onClickBookingButton
+                )
             }
             TopAppBar(
                 primaryPainter = painterResource(id = R.drawable.icon_exit),
@@ -136,7 +137,7 @@ fun BookingContent(state: BookingUiState) {
                 ) {
                     PrimaryButton(
                         painter = painterResource(id = R.drawable.icon_bocking),
-                        text = stringResource(R.string.booking)
+                        text = stringResource(R.string.booking), onClick = onClickBookingButton
                     )
                 }
             }
@@ -147,5 +148,5 @@ fun BookingContent(state: BookingUiState) {
 @Preview
 @Composable
 fun PreviewBooking() {
-    BookingScreen()
+
 }
