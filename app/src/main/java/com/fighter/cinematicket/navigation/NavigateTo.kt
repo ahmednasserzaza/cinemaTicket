@@ -1,4 +1,4 @@
-package com.fighter.cinematicket.composable
+package com.fighter.cinematicket.navigation
 
 import androidx.navigation.NavHostController
 import androidx.compose.animation.slideInHorizontally

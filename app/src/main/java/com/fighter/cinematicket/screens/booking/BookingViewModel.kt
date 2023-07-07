@@ -13,7 +13,6 @@ class BookingViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(BookingUiState())
     val state = _state.asStateFlow()
 
-
     init {
         getActors()
     }

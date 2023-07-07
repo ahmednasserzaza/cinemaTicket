@@ -18,7 +18,6 @@ fun CinemaApp() {
     }
 }
 
-
 @Preview
 @Composable
 fun PreviewFood() {

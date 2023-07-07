@@ -48,8 +48,7 @@ fun ItemTime(time: String) {
         }
 
     }
-
-
+    
 }
 
 @Preview

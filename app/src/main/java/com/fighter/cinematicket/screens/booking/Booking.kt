@@ -38,7 +38,7 @@ import com.fighter.cinematicket.composable.PrimaryButton
 import com.fighter.cinematicket.composable.RoundedButton
 import com.fighter.cinematicket.composable.TextBookingHeader
 import com.fighter.cinematicket.composable.TopAppBar
-import com.fighter.cinematicket.composable.navigateToTicketScreen
+import com.fighter.cinematicket.navigation.navigateToTicketScreen
 import com.fighter.cinematicket.ui.theme.White
 
 @Composable

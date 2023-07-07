@@ -18,13 +18,16 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.pager.PagerState
 import kotlin.math.absoluteValue
 
 @ExperimentalPagerApi
 @Composable
-fun AutoSliding(moviesImages: List<String>, onUpdateMovieImage: (String) -> Unit) {
-    val pagerState = rememberPagerState(initialPage = 1)
+fun AutoSliding(
+    moviesImages: List<String>,
+    pagerState: PagerState,
+    onUpdateMovieImage: (String) -> Unit
+) {
 
     Column(
         Modifier

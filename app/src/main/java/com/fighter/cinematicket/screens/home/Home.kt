@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,24 +35,31 @@ import com.fighter.cinematicket.composable.LargeMovieName
 import com.fighter.cinematicket.composable.OutLinedChip
 import com.fighter.cinematicket.composable.RoundedButton
 import com.fighter.cinematicket.composable.UnSelectedIcon
-import com.fighter.cinematicket.composable.navigateToBookingScreen
+import com.fighter.cinematicket.navigation.navigateToBookingScreen
 import com.fighter.cinematicket.ui.theme.White
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.rememberPagerState
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    val pagerState = rememberPagerState(initialPage = 1)
 
-    HomeContent(state, viewModel::updateCurrentImage) { navigateToBookingScreen(navController) }
+    HomeContent(state, pagerState, viewModel::updateCurrentImage) {
+        navigateToBookingScreen(navController)
+    }
 }
 
-@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeContent(
     state: HomeUiState,
+    pagerState: PagerState,
     onUpdateMovieImage: (String) -> Unit,
     onClickHomeIcon: () -> Unit
 ) {
@@ -84,7 +90,7 @@ fun HomeContent(
                     OutLinedChip(text = stringResource(R.string.coming_soon))
                 }
 
-                AutoSliding(state.images, onUpdateMovieImage)
+                AutoSliding(state.images, pagerState, onUpdateMovieImage)
             }
 
         }

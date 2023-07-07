@@ -37,7 +37,7 @@ import com.fighter.cinematicket.composable.ItemDate
 import com.fighter.cinematicket.composable.ItemTime
 import com.fighter.cinematicket.composable.PrimaryButton
 import com.fighter.cinematicket.composable.SeatsGraphItem
-import com.fighter.cinematicket.composable.navigateToHomeScreen
+import com.fighter.cinematicket.navigation.navigateToHomeScreen
 import com.fighter.cinematicket.ui.theme.Black
 import com.fighter.cinematicket.ui.theme.Gray
 import com.fighter.cinematicket.ui.theme.OpenSans
@@ -51,12 +51,16 @@ fun TicketScreen(
 ) {
     val state by viewModel.state.collectAsState()
     TicketContent(
-        state = state
-    ) { navigateToHomeScreen(navController) }
+        state = state,
+        onClickByTicketButton = { navigateToHomeScreen(navController) }
+    )
 }
 
 @Composable
-fun TicketContent(state: TicketUiState, onClickByTicketButton: () -> Unit) {
+fun TicketContent(
+    state: TicketUiState,
+    onClickByTicketButton: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,7 +71,7 @@ fun TicketContent(state: TicketUiState, onClickByTicketButton: () -> Unit) {
                 primaryPainter = painterResource(id = R.drawable.icon_exit),
                 modifier = Modifier.padding(16.dp)
             )
-            CinemaScreen(painter = painterResource(id = R.drawable.poster_image))
+            CinemaScreen(painter = painterResource(id = R.drawable.cinema_screen))
             CinemaSeats()
             Row(
                 Modifier
@@ -94,18 +98,14 @@ fun TicketContent(state: TicketUiState, onClickByTicketButton: () -> Unit) {
                 contentPadding = PaddingValues(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                items(state.dates) {
-                    ItemDate(it, {})
-                }
+                items(state.dates) { ItemDate(it, {}) }
             }
 
             LazyRow(
                 contentPadding = PaddingValues(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(state.times) {
-                    ItemTime(it)
-                }
+                items(state.times) { ItemTime(it) }
             }
 
             Spacer(modifier = Modifier.weight(1f))
